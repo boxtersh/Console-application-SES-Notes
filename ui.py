@@ -85,5 +85,18 @@ def menu_options() -> str:
 
     return numb_menu
 
+# Выбор пункта меню
+def select_item_menu(numb_menu: str) -> str:
+    """
+    :param numb_menu: Ключ выбора меню
+    :return: Выбор пункта меню
+    """
+    result_user_input = input(dict_select_item_menu[numb_menu])
+    result_user_input = validate.del_menu_item_symbol(result_user_input)
+
+    return result_user_input
+
+
+
 
 
