@@ -112,3 +112,7 @@ def input_user(message) -> str:
     """
     return input(message)
 
+# Сообщение из словаря для пользователя в ходе программы
+def information_for_user(message: str) -> None:
+
+    print(f'{message}\n')
