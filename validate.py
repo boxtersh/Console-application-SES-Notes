@@ -30,3 +30,22 @@ def choice_yes_no(result: str, message: str, error: str) -> bool:
         return True
 
     return False
+
+# Проверка выбора пункта меню в зависимости от активного меню
+def check_value_menu_item(result_user_input, numb_menu) -> bool:
+    """
+    :param result_user_input: значение пункта меню
+    :param numb_menu: ключ активации меню
+    :return: bool
+    """
+    if numb_menu == 'menu_one':
+        return result_user_input in ['1', '2', 'exit']
+
+    elif numb_menu == 'menu_collection':
+        return result_user_input in ['1', '2', '3', '4', '5', '6', '7', 'exit']
+
+    elif numb_menu == 'menu_note':
+        return result_user_input in ['1', '2', '3', '4', '5', '6', '7', '8', 'exit']
+
+    else:
+        return False
