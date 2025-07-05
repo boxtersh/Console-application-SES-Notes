@@ -104,5 +104,11 @@ def input_error(message) -> None:
     """
     print(f'{message}\n')
 
-
+# Сообщение пользователю - ввести данные
+def input_user(message) -> str:
+    """
+    :param message: Сообщение пользователю из словаря - ввод данных
+    :return: Данные от пользователя
+    """
+    return input(message)
 
