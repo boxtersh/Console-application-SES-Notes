@@ -336,3 +336,85 @@ def delete_select_note_in_collection() -> None:
 
     except:
         ui.information_for_user(ui.dict_output_user['не создан'])
+
+# Редактирование заметки выбранного сборника
+def edit_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+
+    name_files = requesting_file_name_from_directory(ui.dict_input_user['редактировать сборник'], ui.dict_input_error['нет файла'])
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+
+        with open(path_and_base_name, "rb") as file:
+            collection = pickle.load(file)
+
+    except:
+
+        ui.information_for_user(ui.dict_output_user['не таблица'])
+        return
+    list_name_note = []
+    print('\nВ сборнике следующие имена заметок:')
+
+    for i in range(1, len(collection)):
+            list_name_note.append(collection[i][3])
+            print(collection[i][3])
+
+    name_note = ui.input_user(ui.dict_input_user['редактировать заметку'])
+
+    while not name_note in list_name_note:
+
+        ui.input_error(ui.dict_input_error['нет заметки'])
+        name_note = ui.input_user(ui.dict_input_user['редактировать заметку'])
+
+    for i in range(1, len(collection)):
+        if collection[i][3] == name_note:
+            collection[i][0] = datetime.datetime.today().strftime("%d.%B.%Y")
+            for key in ui.dict_note_fields.keys():
+                print('Значение редактируемого поля: ', collection[i][key])
+                field = ui.input_user(ui.dict_note_fields[key])
+
+                if key == 2:
+                    if field.lower() == 'срочная':
+                        collection[i][key] = field
+
+                    elif field.lower() == 'важная':
+                        collection[i][key] = field
+
+                    else:
+                        collection[i][key] = 'обычная'
+
+                    continue
+
+                if key == 3:
+
+                    while (field in list_name_note and field != collection[i][key]) or field == '':
+                        print(field, collection[i][key])
+                        ui.input_error(ui.dict_input_error['имя заметки'])
+                        field = ui.input_user(ui.dict_note_fields[key])
+
+                    collection[i][key] = field
+                    continue
+
+
+                collection[i][key] = field
+
+            break
+
+    try:
+        with open(path_and_base_name, "wb") as file:
+            pickle.dump(collection, file)
+
+        ui.information_for_user(ui.dict_output_user['заметка изменена'])
+
+    except:
+        ui.information_for_user(ui.dict_output_user['не создан'])
