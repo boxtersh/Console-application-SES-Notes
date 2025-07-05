@@ -601,7 +601,51 @@ def create_new_note() -> list:
 
     return collection
 
+# Создание пустого файла сборника
+def create_collection() -> (str, None):
+    """
+    :return: str, None
+    """
 
+    if not create_directory(ui.path):
+
+        ui.information_for_user(ui.dict_output_user['не создать'])
+        return
+
+    list_name_files = list_name_file()
+    name_files = ui.input_user(ui.dict_input_user['Введите имя файла'])
+
+    while True:
+
+        while not validate.check_value_input_user_name_file(name_files):
+
+            ui.input_error(ui.dict_input_error['недопустимое имя'])
+            name_files = ui.input_user(ui.dict_input_user['Новое имя файла'])
+
+        if name_files in list_name_files:
+
+            ui.input_error(ui.dict_output_user['уже есть'])
+            name_files = ui.input_user(ui.dict_input_user['Новое имя файла'])
+
+        else:
+            break
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+
+        with open(path_and_base_name, "wb") as file:
+
+            ui.information_for_user(ui.dict_output_user['успешно файл'])
+
+            return path_and_base_name
+
+    except:
+
+        ui.information_for_user(ui.dict_output_user['не создан'])
+
+        return
 
 
 
