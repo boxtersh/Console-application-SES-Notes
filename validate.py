@@ -76,3 +76,8 @@ def file_exists_in_directory(path_the_directory, file) -> bool:
 
     return file in os.listdir(path_the_directory)
 
+# Каталог пуст да/нет
+def catalog_is_empty(path_the_directory) -> bool:
+
+    return len(os.listdir(path_the_directory)) == 0
+
