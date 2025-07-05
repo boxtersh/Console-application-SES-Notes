@@ -207,3 +207,20 @@ def add_notes_collection() -> None:
 
     except:
         ui.information_for_user(ui.dict_output_user['не создан'])
+
+# Запрос имени файла из списка в директории
+def requesting_file_name_from_directory(requesting: str, error: str) -> str:
+
+    """
+    :param requesting: str сообщение из словаря, что требуется
+    :param error: str сообщение из словаря, в случае ошибки
+    :return:
+    """
+    list_name_files = list_name_file()
+    name_files = ui.input_user(requesting)
+
+    while not name_files in list_name_files:
+        ui.input_error(error)
+        name_files = ui.input_user(requesting)
+
+    return name_files
