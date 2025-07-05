@@ -96,7 +96,13 @@ def select_item_menu(numb_menu: str) -> str:
 
     return result_user_input
 
-
+# Сообщение из словаря об ошибке ввода
+def input_error(message) -> None:
+    """
+    :param message: Сообщение из словаря об ошибке ввода
+    :return: None
+    """
+    print(f'{message}\n')
 
 
 
