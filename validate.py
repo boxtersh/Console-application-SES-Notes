@@ -63,4 +63,12 @@ def check_value_input_user_name_file(input_user_name_file: str) -> bool:
 
     return True
 
+# Проверка cуществует директория да/нет
+def directory_exists_yes_no(path_the_directory: str) -> bool:
+    """
+    :param path_file: Путь к директории программы
+    :return: Да/нет
+    """
+    return os.path.exists(path_the_directory)
+
 
