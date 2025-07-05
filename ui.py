@@ -53,7 +53,14 @@ def menu_note() -> str:
 
     return numb_menu
 
+# Вывод меню удаления сборника(ов)
+def menu_del_collection() -> None:
+    """
+    :return: None
+    """
 
+    for key in dict_menu_del_collection.keys():
+        print(f'\033[36m{key}\033[0m - {dict_menu_del_collection[key]}')
 
 
 
