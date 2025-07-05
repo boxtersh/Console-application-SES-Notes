@@ -8,20 +8,6 @@ def print_hi_bye(messag: str) -> None:
     """
     print(f'\n{messag}')
 
-# Вывод меню рабочая директория программы
-def menu_one() -> str:
-    """
-    Меню программы. Рабочая директория есть, но нет ни одного сборника заметок
-    :return: str
-    """
-    print(f'\n\033[35mУ Вас нет ни одного сборника\033[0m\n\033[36mМеню:\033[0m')
-    for key in dict_menu_one.keys():
-        print(f'\033[36m{key}\033[0m - {dict_menu_one[key]}')
-
-    print()
-    numb_menu = 'menu_one'
-
-    return numb_menu
 
 
 
