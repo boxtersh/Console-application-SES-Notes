@@ -62,7 +62,28 @@ def menu_del_collection() -> None:
     for key in dict_menu_del_collection.keys():
         print(f'\033[36m{key}\033[0m - {dict_menu_del_collection[key]}')
 
+# Вывод главного меню
+def menu_options() -> str:
+    """
+    Выбор меню
+    :return: str Ключ меню
+    """
+    numb_menu =''
+    if validate.directory_exists_yes_no(path):
 
+        if validate.catalog_is_empty(path):
+            numb_menu = 'menu_one'
+
+            return numb_menu
+
+        else:
+            numb_menu = 'menu_collection'
+
+            return numb_menu
+
+    numb_menu = 'menu_one'
+
+    return numb_menu
 
 
 
