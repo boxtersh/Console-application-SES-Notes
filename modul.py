@@ -694,4 +694,33 @@ def menu_delete_collection() -> None:
         ui.input_error(ui.dict_input_error['Ошибка ввода'])
         menu_item = ui.input_user(ui.dict_input_user['Удалить сборник меню'])
 
+# Удалить файл выбранной коллекции
+def del_selected_file_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+
+    name_files = requesting_file_name_from_directory(ui.dict_input_user['Удалить сборник'], ui.dict_input_error['нет файла'])
+
+    basename = name_files + '.ses'
+    yes_no = ui.input_user(ui.dict_output_user['не восстановить'])
+    yes_no_result = validate.choice_yes_no(yes_no, ui.dict_output_user['не восстановить'], ui.dict_input_error['y/n'])
+
+    if yes_no_result:
+       os.remove(os.path.join(ui.path, basename))
+       ui.information_for_user(ui.dict_output_user['успешно удален'])
+       print()
+       return
+
+    else:
+        return
+
+
+
+
 
