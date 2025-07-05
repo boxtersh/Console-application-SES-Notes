@@ -581,4 +581,28 @@ def note(name_note_in_list: list = [''], collection = []) -> list:
 
     return collection
 
+# Формирование массива заметок
+def create_new_note() -> list:
+    """
+    :return: list
+    """
+
+    heading = ['Дата', 'Тип', 'Важность', 'Имя', 'Содержание', 'Владелец', '', '']
+    collection = note()
+    password_yes_no = input(ui.dict_input_user['пароль_y_n'])
+
+    if validate.choice_yes_no(password_yes_no, ui.dict_input_user['пароль'],ui.dict_input_error['y/n']):
+        password = input(ui.dict_input_user['пароль'])
+        heading[6] = password
+
+
+    heading[7] = str(len(collection))
+    collection.insert(0, heading)
+
+    return collection
+
+
+
+
+
 
