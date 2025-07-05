@@ -435,3 +435,27 @@ def are_collections_yes_no() -> bool:
         return False
 
     return True
+
+# Создание новой заметки в новом сборнике
+def create_new_note_in_new_collection() -> None:
+    """
+    :return: None
+    """
+    path_and_base_name = create_collection()
+
+    if path_and_base_name == None:
+
+        ui.information_for_user(ui.dict_output_user['не создан'])
+        return
+
+    collection = create_new_note()
+
+    try:
+        with open(path_and_base_name, "wb") as file:
+            pickle.dump(collection, file)
+
+        ui.information_for_user(ui.dict_output_user['успешно заметка'])
+
+    except:
+        ui.information_for_user(ui.dict_output_user['не создан'])
+
