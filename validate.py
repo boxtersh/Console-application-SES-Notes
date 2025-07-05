@@ -81,3 +81,11 @@ def catalog_is_empty(path_the_directory) -> bool:
 
     return len(os.listdir(path_the_directory)) == 0
 
+# Проверка экземпляра на класс лист
+def data_is_list(lst: (None, list)) -> bool:
+    """
+    :param lst: список
+    :return: bool
+    """
+    return isinstance(lst, list)
+
