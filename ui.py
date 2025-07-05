@@ -38,7 +38,20 @@ def menu_collection() -> str:
 
     return numb_menu
 
+# Вывод меню работы с заметками
+def menu_note() -> str:
+    """
+    Меню работы с заметками (строками в файлах)
+    :return: str Ключ вывода меню
+    """
+    print(f'\n\033[36mМеню работы с заметками:\033[0m')
+    for key in dict_menu_note.keys():
+        print(f'\033[36m{key}\033[0m - {dict_menu_note[key]}')
 
+    print()
+    numb_menu = 'menu_note'
+
+    return numb_menu
 
 
 
