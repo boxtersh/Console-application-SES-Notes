@@ -418,3 +418,20 @@ def edit_collection() -> None:
 
     except:
         ui.information_for_user(ui.dict_output_user['не создан'])
+
+# Проверка наличия рабочей директории и наличия сборников
+def are_collections_yes_no() -> bool:
+    """
+    :return: bool
+    """
+    if not validate.directory_exists_yes_no(ui.path):
+
+        ui.information_for_user(ui.dict_output_user['Нет Директории'])
+        return False
+
+    if list_name_file() == []:
+
+        ui.information_for_user(ui.dict_output_user['Нет сборников'])
+        return False
+
+    return True
