@@ -488,5 +488,51 @@ def delete_all_note_in_collection() -> None:
 
             ui.information_for_user(ui.dict_output_user['все заметки удалены'])
 
+# Вывод в консоль всех заметок сборника
+def console_output_all_note_from_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
 
+    file_collections()
+    name_files = requesting_file_name_from_directory(ui.dict_input_user['чтение заметок'], ui.dict_input_error['нет файла'])
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+        with open(path_and_base_name, "rb") as file:
+            collection = pickle.load(file)
+    except:
+        ui.information_for_user(ui.dict_output_user['пустой'])
+        return
+
+    if not validate.data_is_list(collection):
+
+        ui.information_for_user(ui.dict_output_user['пустой'])
+
+        return
+
+    if collection[0][6] != '':
+
+        password = input(ui.dict_input_user['пароль'])
+
+        while password != collection[0][6]:
+
+            ui.input_error(ui.dict_input_error['не верно пароль'])
+            password = input(ui.dict_input_user['пароль'])
+
+            if password == collection[0][6]:
+                break
+
+            elif password == 'exit':
+                return
+
+    print(f'\nВаши заметки - {collection[0][7]}шт')
+    print('-' * 120)
+
+    table_note(collection)
 
