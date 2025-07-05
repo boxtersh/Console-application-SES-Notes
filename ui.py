@@ -23,7 +23,20 @@ def menu_one() -> str:
 
     return numb_menu
 
+# Вывод меню работы со сборниками
+def menu_collection() -> str:
+    """
+    Меню работы с каталогами (файлами)
+    :return:
+    """
+    print(f'\n\033[36mМеню работы со сборниками:\033[0m')
+    for key in dict_menu_collection.keys():
+        print(f'\033[36m{key}\033[0m - {dict_menu_collection[key]}')
 
+    print()
+    numb_menu = 'menu_collection'
+
+    return numb_menu
 
 
 
