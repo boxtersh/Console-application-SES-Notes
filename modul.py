@@ -536,3 +536,49 @@ def console_output_all_note_from_collection() -> None:
 
     table_note(collection)
 
+# Заполнение полей таблицы
+def note(name_note_in_list: list = [''], collection = []) -> list:
+    """
+    :param name_note_in_list: list Список имен всех заметок сборника
+    :param collection: list Пустой список таблицы
+    :return:
+    """
+
+    print('\033[36mЗаполните следующие поля:\033[0m')
+    new_note_yes_no = 'y'
+    while new_note_yes_no in ['Y', 'y']:
+        note = []
+        note.append(datetime.datetime.today().strftime("%d.%B.%Y"))
+        for key in ui.dict_note_fields.keys():
+            field = input(ui.dict_note_fields[key])
+            if key == 2:
+                if field.lower() == 'срочная':
+                    note.append(field.lower())
+
+                elif field.lower() == 'важная':
+                    note.append(field.lower())
+
+                else:
+                    note.append('обычная')
+
+                continue
+
+            if key == 3:
+
+                while field in name_note_in_list or field.isspace():
+                    print('\033[31mТакое имя заметки существует\033[0m, выберете другое')
+                    field = input(ui.dict_note_fields[key])
+                name_note_in_list.append(field)
+
+            note.append(field)
+
+        collection.append(note)
+
+        new_note_yes_no = input(ui.dict_input_user['еще одну'])
+        new_note_yes_no = 'y' if validate.choice_yes_no(new_note_yes_no, ui.dict_input_user['еще одну'],
+                                                        ui.dict_input_error['y/n']) else 'no'
+        print()
+
+    return collection
+
+
