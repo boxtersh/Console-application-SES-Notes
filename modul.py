@@ -720,7 +720,33 @@ def del_selected_file_collection() -> None:
     else:
         return
 
+# Удалить все файлы коллекции
+def del_all_file_collection() -> None:
 
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+    list_name_files = list_name_file()
+    yes_no = ui.input_user(ui.dict_output_user['Все не восстановить'])
+    yes_no_result = validate.choice_yes_no(yes_no, ui.dict_output_user['Все не восстановить'], ui.dict_input_error['y/n'])
+
+    if yes_no_result:
+
+        for name in list_name_files:
+            basename = name + '.ses'
+            os.remove(os.path.join(ui.path, basename))
+
+        ui.information_for_user(ui.dict_output_user['все успешно удалено'])
+        print()
+        return
+
+    else:
+        return
 
 
 
