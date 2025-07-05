@@ -842,5 +842,19 @@ def create_directory(path_file:str) -> bool:
 
         return True
 
+# Выводит на экран имена файлов сборников без расширения
+def file_collections() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+    list_name_files = list_name_file()
 
+    print(f'\n{ui.dict_output_user['доступно']}')
+
+    for filename in list_name_files:
+
+        print(filename)
 
