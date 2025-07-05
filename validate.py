@@ -49,3 +49,18 @@ def check_value_menu_item(result_user_input, numb_menu) -> bool:
 
     else:
         return False
+
+# Проверка допустимости имени файла
+def check_value_input_user_name_file(input_user_name_file: str) -> bool:
+    """
+    :param input_user_name_file: Имя файла от пользователя
+    :return: Допустимое имя Да/Нет
+    """
+    for symbol in input_user_name_file:
+
+        if symbol not in acceptable_characters:
+            return False
+
+    return True
+
+
