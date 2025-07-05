@@ -821,7 +821,26 @@ def menu_rename_selected_file_collection() -> None:
     except:
         ui.information_for_user(ui.dict_input_error['Ошибка переименования'])
 
+# Проверка и создание директории программы
+def create_directory(path_file:str) -> bool:
+    """
+    :param path_file: str Путь к директории программы
+    :return: bool Создана директория Да/Нет
+    """
+    if not validate.directory_exists_yes_no(path_file):
 
+        try:
+
+            os.mkdir(os.path.join(os.getenv('LOCALAPPDATA'), 'Notes'))
+            return True
+
+        except:
+
+            return False
+
+    else:
+
+        return True
 
 
 
