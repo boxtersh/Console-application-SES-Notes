@@ -224,3 +224,55 @@ def requesting_file_name_from_directory(requesting: str, error: str) -> str:
         name_files = ui.input_user(requesting)
 
     return name_files
+
+# Экспорт сборника заметок в CSV файл
+def exporting_collection_in_CSV_file() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+
+    name_files = requesting_file_name_from_directory(ui.dict_input_user['Файл CSV'], ui.dict_input_error['нет файла'])
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+
+        with open(path_and_base_name, "rb") as file:
+            collection = pickle.load(file)
+
+    except:
+
+        ui.information_for_user(ui.dict_output_user['не таблица'])
+        return
+
+    base_name = name_files + '.csv'
+    path = ui.input_user(ui.dict_input_user['Путь CSV'])
+
+    while not validate.directory_exists_yes_no(path):
+
+        ui.input_error(ui.dict_input_error['Нет пути'])
+        path = ui.input_user(ui.dict_input_user['Путь CSV'])
+
+    path_and_base_name = os.path.join(path, base_name)
+    separator = ui.input_user(ui.dict_input_user[',/;'])
+
+    while separator not in [',', ';']:
+        ui.input_error(ui.dict_input_error['Не символ ,/;'])
+        separator = ui.input_user(ui.dict_input_user[',/;'])
+
+    print(ui.dict_output_user['выбранный символ'],separator)
+
+    with open(path_and_base_name, mode = "w", encoding='utf-8') as w_file:
+        file_writer = csv.writer(w_file, delimiter = separator, lineterminator = "\r")
+
+        for row in collection:
+
+            file_writer.writerow(row[:6])
+
+        ui.information_for_user(ui.dict_output_user['успешно CSV'])
