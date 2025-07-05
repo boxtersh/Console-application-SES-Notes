@@ -748,5 +748,80 @@ def del_all_file_collection() -> None:
     else:
         return
 
+# Переименование выбранного файла сборника
+def menu_rename_selected_file_collection() -> None:
+
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+
+    name_files = requesting_file_name_from_directory(ui.dict_input_user['Переименовать'], ui.dict_input_error['нет файла'])
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+        with open(path_and_base_name, "rb") as file:
+            collection = pickle.load(file)
+            result = True
+    except:
+        result = False
+
+    if result:
+
+        if isinstance(collection, list):
+
+            if collection[0][6] != '':
+
+                password = input(ui.dict_input_user['пароль'])
+
+                while password != collection[0][6]:
+
+                    ui.input_error(ui.dict_input_error['не верно пароль'])
+                    password = input(ui.dict_input_user['пароль'])
+
+                    if password == collection[0][6]:
+                        break
+
+                    elif password == 'exit':
+                        return
+
+    new_name_files = ui.input_user(ui.dict_input_user['Новое имя файла'])
+
+    while True:
+
+        while not validate.check_value_input_user_name_file(new_name_files):
+
+            ui.input_error(ui.dict_input_error['недопустимое имя'])
+            new_name_files = ui.input_user(ui.dict_input_user['Новое имя файла'])
+
+        if new_name_files in list_name_file():
+
+            ui.input_error(ui.dict_output_user['уже есть'])
+            new_name_files = ui.input_user(ui.dict_input_user['Новое имя файла'])
+
+        else:
+            break
+
+    name_files = name_files + '.ses'
+    new_name_files = new_name_files + '.ses'
+    old_name = os.path.join(ui.path,name_files)
+    new_name = os.path.join(ui.path,new_name_files)
+
+    try:
+        os.rename(old_name, new_name)
+        ui.information_for_user(ui.dict_output_user['успешно переименован'])
+        print()
+        return
+
+    except:
+        ui.information_for_user(ui.dict_input_error['Ошибка переименования'])
+
+
+
 
 
