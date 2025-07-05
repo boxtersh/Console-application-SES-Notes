@@ -459,3 +459,34 @@ def create_new_note_in_new_collection() -> None:
     except:
         ui.information_for_user(ui.dict_output_user['не создан'])
 
+# Удалить все заметки из сборника
+def delete_all_note_in_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+    list_name_files = list_name_file()
+
+    name_files = ui.input_user(ui.dict_input_user['удалить все заметки'])
+
+    while name_files not in list_name_files:
+        ui.input_error(ui.dict_input_error['нет файла'])
+        name_files = ui.input_user(ui.dict_input_user['удалить все заметки'])
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+    yes_no = ui.input_user(ui.dict_output_user['Все не восстановить заметки'])
+    yes_no_result = validate.choice_yes_no(yes_no, ui.dict_output_user['Все не восстановить заметки'], ui.dict_input_error['y/n'])
+
+    if yes_no_result:
+
+        with open(path_and_base_name, "wb") as file:
+
+            ui.information_for_user(ui.dict_output_user['все заметки удалены'])
+
+
+
