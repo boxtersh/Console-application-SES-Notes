@@ -89,3 +89,6 @@ def data_is_list(lst: (None, list)) -> bool:
     """
     return isinstance(lst, list)
 
+# Строка допустимых символов имени файла
+acceptable_characters = ('-_,.ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz'
+                            'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя')
