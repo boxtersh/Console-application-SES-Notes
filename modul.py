@@ -276,3 +276,63 @@ def exporting_collection_in_CSV_file() -> None:
             file_writer.writerow(row[:6])
 
         ui.information_for_user(ui.dict_output_user['успешно CSV'])
+
+# Удалить выбранную заметку из сборника
+def delete_select_note_in_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
+
+    file_collections()
+    list_name_files = list_name_file()
+    name_files = ui.input_user(ui.dict_input_user['удалить заметку'])
+
+    while not name_files in list_name_files:
+
+        ui.input_error(ui.dict_input_error['нет файла'])
+        name_files = ui.input_user(ui.dict_input_user['удалить заметку'])
+
+    base_name = name_files + '.ses'
+    path_and_base_name = os.path.join(ui.path, base_name)
+
+    try:
+
+        with open(path_and_base_name, "rb") as file:
+            collection = pickle.load(file)
+
+    except:
+
+        ui.information_for_user(ui.dict_output_user['не таблица'])
+        return
+    list_name_note = []
+    print('\nВ сборнике следующие имена заметок:')
+
+    for i in range(1, len(collection)):
+            list_name_note.append(collection[i][3])
+            print(collection[i][3])
+
+    name_note = ui.input_user(ui.dict_input_user['удалить 1 заметку'])
+
+    while not name_note in list_name_note:
+
+        ui.input_error(ui.dict_input_error['нет заметки'])
+        name_note = ui.input_user(ui.dict_input_user['удалить 1 заметку'])
+
+    for i in range(1, len(collection)):
+
+        if collection[i][3] == name_note:
+
+            del collection[i]
+            break
+
+    try:
+        with open(path_and_base_name, "wb") as file:
+            pickle.dump(collection, file)
+
+        ui.information_for_user(ui.dict_output_user['заметка удалена'])
+
+    except:
+        ui.information_for_user(ui.dict_output_user['не создан'])
