@@ -647,6 +647,22 @@ def create_collection() -> (str, None):
 
         return
 
+# Список имен файлов сборников без расширения
+def list_name_file() -> list:
+    """
+    :return: list
+    """
+    list_name_file = []
+    mask_file = os.path.join(ui.path, '*.ses')
+    files = glob.glob(mask_file)
+
+    for elm in files:
+        base_name = os.path.basename(elm)
+        file_name = os.path.splitext(base_name)
+        list_name_file.append(file_name[0])
+
+    return list_name_file
+
 
 
 
