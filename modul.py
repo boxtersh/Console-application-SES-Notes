@@ -857,4 +857,3 @@ def file_collections() -> None:
     for filename in list_name_files:
 
         print(filename)
-
