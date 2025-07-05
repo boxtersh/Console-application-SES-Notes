@@ -663,6 +663,35 @@ def list_name_file() -> list:
 
     return list_name_file
 
+# Вывод меню удаления файлов сборников
+def menu_delete_collection() -> None:
+    """
+    :return: None
+    """
+    if not are_collections_yes_no():
+        ui.information_for_user(ui.dict_output_user['невозможное действие'])
+        return
 
+    file_collections()
+
+    print()
+    ui.menu_del_collection()
+    menu_item = ui.input_user(ui.dict_input_user['Удалить сборник меню'])
+
+    while True:
+
+        match menu_item:
+            case '1':
+                del_selected_file_collection()
+                return
+
+            case '2':
+                del_all_file_collection()
+                return
+            case '3':
+                return
+
+        ui.input_error(ui.dict_input_error['Ошибка ввода'])
+        menu_item = ui.input_user(ui.dict_input_user['Удалить сборник меню'])
 
 
