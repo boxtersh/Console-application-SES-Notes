@@ -71,4 +71,8 @@ def directory_exists_yes_no(path_the_directory: str) -> bool:
     """
     return os.path.exists(path_the_directory)
 
+# Существует файл в директории да/нет
+def file_exists_in_directory(path_the_directory, file) -> bool:
+
+    return file in os.listdir(path_the_directory)
 
