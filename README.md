@@ -2,8 +2,7 @@
 
 # <span style='color: red;'>Console application - SES Notes</span>
 
-### <span style='color: turquoise;'>Приложение для работы с заметками</span>
-### <span style='color: turquoise;'>имеет три меню:</span>
+### <span style='color: turquoise;'>Приложение для работы с заметками имеет три меню:</span>
 __<span style='color: yellow;'>Стартовое меню:</span>__ (нет рабочей директории и ни одного файла заметки)
 ~~~
    1:  Создать сборник заметок
